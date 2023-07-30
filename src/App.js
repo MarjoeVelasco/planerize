@@ -1,17 +1,16 @@
 import React from 'react';
-import { ChakraProvider, Box, Text, Link, VStack, Code, Grid, theme } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { ChakraProvider} from '@chakra-ui/react';
+import { ColorModeSwitcher } from './Components/colorswitcher/ColorModeSwitcher';
+import RouterProvider from './Routes/RouterProvider';
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <ChakraProvider>
-      <p>Test</p>
-        <ul>
-          <ol>1</ol>
-          <ol>1</ol>
-          <ol>1</ol>
-        </ul>
+      <BrowserRouter>
+      <ColorModeSwitcher initialColorMode="dark" ></ColorModeSwitcher>
+      <RouterProvider/>
+        </BrowserRouter>
     </ChakraProvider>
   );
 }
