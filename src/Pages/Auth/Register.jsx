@@ -1,12 +1,10 @@
 import { Box, useColorMode, Container, Stack, Heading, FormControl, FormLabel, Input, Divider, Text, Button, Link } from '@chakra-ui/react';
 import { Logo } from '../../Assets/Logo/Logo';
 import { PasswordField } from '../../Assets/Fields/PasswordField';
+import { bgColor, bgColorInput, textColorInput } from '../../helper/theme';
 
 export const Register = () => {
   const { colorMode } = useColorMode();
-  const bgColor = { light: '#F7FAFC', dark: '#2C7A7B' };
-  const bgColorInput = { light: '#F7FAFC', dark: '#ffffff' };
-  const textColorInput = { light: '#2C7A7B', dark: 'black' };
 
   const handleRegister = () => {
     // Handle the form submission here

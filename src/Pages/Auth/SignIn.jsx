@@ -1,12 +1,10 @@
 import { Box, useColorMode, Container, Stack, Heading, FormControl, FormLabel, Input, Divider, Text, Button, Link } from '@chakra-ui/react'
 import { Logo } from '../../Assets/Logo/Logo'
 import { PasswordField } from '../../Assets/Fields/PasswordField'
+import { bgColor, bgColorInput, textColorInput } from '../../helper/theme';
 
 export const SignIn = () => {
   const { colorMode } = useColorMode();
-  const bgColor = { light: '#F7FAFC', dark: '#2C7A7B' };
-  const bgColorInput = { light: '#F7FAFC', dark: '#ffffff' };
-  const textColorInput = { light: '#2C7A7B', dark: 'black' };
 
   return (
     <Container maxW="lg" py={{ base: '12', md: '24' }} px={{ base: '0', sm: '8' }}>
