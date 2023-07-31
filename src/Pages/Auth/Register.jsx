@@ -1,6 +1,7 @@
 import { Box, useColorMode, Container, Stack, Heading, FormControl, FormLabel, Input, Divider, Text, Button, Link } from '@chakra-ui/react';
 import { Logo } from '../../Assets/Logo/Logo';
-import { PasswordField } from '../../Assets/Fields/PasswordField';
+import { useState } from "react";
+import { registerApi } from '../../Services/api/auth';
 
 export const Register = () => {
   const { colorMode } = useColorMode();
@@ -8,9 +9,37 @@ export const Register = () => {
   const bgColorInput = { light: '#F7FAFC', dark: '#ffffff' };
   const textColorInput = { light: '#2C7A7B', dark: 'black' };
 
-  const handleRegister = () => {
-    // Handle the form submission here
-    // You can make an API call to register the user
+  const [serverResponse, setServerResponse] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirm_password: ''
+  });
+
+  const handleInputChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+     // Check if password and confirm password match
+     if (formData.password !== formData.password_confirm) {
+      setServerResponse('Passwords do not match.');
+      return;
+    }
+
+    try {
+      const response = await registerApi(formData);
+      setServerResponse(response.message);
+    } catch (error) {
+      //console.error('Registration Failed:', error);
+      setServerResponse('Registration Failed. Please try again later.');
+    }
   };
 
   return (
@@ -18,7 +47,7 @@ export const Register = () => {
       <Stack spacing="8">
         <Stack spacing="6">
           <Box align="center">
-            <Logo />
+            <Logo width="75px" height="75px" />
           </Box>
 
           <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
@@ -36,14 +65,46 @@ export const Register = () => {
           borderRadius={{ base: 'none', sm: 'xl' }}
         >
           <Stack spacing="5">
+
+          <FormControl>
+              <FormLabel htmlFor="name">Name</FormLabel>
+              <Input id="name" name="name" 
+              value={formData.name}
+              onChange={handleInputChange}
+              type="text" bg={bgColorInput[colorMode]} color={textColorInput[colorMode]} required/>
+
+            </FormControl>
+
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
-              <Input id="email" type="email" bg={bgColorInput[colorMode]} color={textColorInput[colorMode]} />
+              <Input id="email" name="email" 
+              value={formData.email}
+              onChange={handleInputChange}
+              type="email" bg={bgColorInput[colorMode]} color={textColorInput[colorMode]} required/>
             </FormControl>
-            <PasswordField bg={bgColorInput[colorMode]} color={textColorInput[colorMode]} />
-            <PasswordField bg={bgColorInput[colorMode]} color={textColorInput[colorMode]} /> {/* Add confirm password field */}
+
+            <FormControl>
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <Input id="password" name="password" 
+              value={formData.password}
+              onChange={handleInputChange}
+              type="password" bg={bgColorInput[colorMode]} color={textColorInput[colorMode]} required/>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel htmlFor="password">Confirm Password</FormLabel>
+              <Input id="password_confirm" name="password_confirm" 
+              value={formData.password_confirm}
+              onChange={handleInputChange}
+              type="password" bg={bgColorInput[colorMode]} color={textColorInput[colorMode]} required/>
+            </FormControl>
           </Stack>
           <Divider />
+          {serverResponse && (
+            <Box textAlign="center" bg={serverResponse.includes('success') ? 'green.50' : 'red.50'} p={2} borderRadius="md">
+              <Text color={serverResponse.includes('success') ? 'green.500' : 'red.500'}>{serverResponse}</Text>
+            </Box>
+          )}
           <Text color="fg.muted">
             Already have an account? <Link href="/">Sign in</Link> {/* Update the link text and route */}
           </Text>

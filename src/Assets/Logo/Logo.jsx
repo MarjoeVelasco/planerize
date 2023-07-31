@@ -1,9 +1,9 @@
 import { chakra } from '@chakra-ui/react';
 
-export const Logo = (props) => (
+export const Logo = ({width, height, ...props}) => (
   <chakra.svg
-    width="75px" // Set the desired width
-    height="75px" // Set the desired height
+    width={width} // Set the desired width
+    height={height} // Set the desired height
     viewBox="0 0 132 119"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
