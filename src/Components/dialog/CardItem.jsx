@@ -1,10 +1,9 @@
-import { useState } from "react"
-import { Card, CardBody, Flex, Spacer, Box, Heading, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Button, useColorMode, Text, Avatar, AvatarGroup, Progress, List, ListItem, ListIcon} from "@chakra-ui/react"
+import { Card, CardBody, Flex, Spacer, Box, Heading, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Button, useColorMode, Text, Avatar, AvatarGroup, Progress, List, ListItem, ListIcon, Input, Stack} from "@chakra-ui/react"
 import { selectedStatusNum } from "../../helper/selectedStatusNum"
 import { selectedStatusName } from "../../helper/selectedStatusName"
 import { ArrowRightIcon, AddIcon, HamburgerIcon, CheckCircleIcon, CheckIcon, CalendarIcon} from "@chakra-ui/icons"
 import { RadioGroupItem } from "./RadioGroupItem"
-import { textColorInput } from "../../helper/theme"
+import { commentBgColor, commentColorInput, textColorInput } from "../../helper/theme"
 
 const CardItem = (props) => {
   const status = selectedStatusNum(props.status)
@@ -91,12 +90,33 @@ const CardItem = (props) => {
               <CalendarIcon boxSize={4} color="yellow.500"/>
               <Text>Activity</Text>
             </Flex>
+            <Flex alignItems="center" gap="2" pt="2" pb="5">
+              <Avatar size='sm' name='Sasuke Uchiha' src='https://bit.ly/broken-link' />
+              <Input placeholder='Write something..' size='sm' bg={commentBgColor[colorMode]} color={commentColorInput[colorMode]} />
+            </Flex>
+            <Stack>
+              <Flex alignItems="center" gap="2" pt="2" pb="2">
+                <Avatar size='sm' name='Sasuke Uchiha' src='https://bit.ly/broken-link' />
+                <Text>Marjoe Velasco</Text>
+                <Spacer/>
+                <Text size="sm" color="gray">07/31/2023</Text>
+              </Flex>
+              <Box pl="10">
+                <Card bg={commentBgColor[colorMode]} color={commentColorInput[colorMode]}>
+                  <CardBody>
+                    Wrote something...
+                  </CardBody>
+                </Card>
+                <Flex pt="2">
+                  <Spacer/>
+                  <Button>Delete</Button>
+                </Flex>
+               
+              </Box>
+            </Stack>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant='ghost'>Secondary Action</Button>
+            <Button bg="black" color="#ffffff">Archive Card</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
