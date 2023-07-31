@@ -1,13 +1,11 @@
 import { Box, useColorMode, Container, Stack, Heading, FormControl, FormLabel, Input, Divider, Text, Button, Link } from '@chakra-ui/react';
 import { Logo } from '../../Assets/Logo/Logo';
+import { bgColor, bgColorInput, textColorInput } from '../../helper/theme';
 import { useState } from "react";
 import { registerApi } from '../../Services/api/auth';
 
 export const Register = () => {
   const { colorMode } = useColorMode();
-  const bgColor = { light: '#F7FAFC', dark: '#2C7A7B' };
-  const bgColorInput = { light: '#F7FAFC', dark: '#ffffff' };
-  const textColorInput = { light: '#2C7A7B', dark: 'black' };
 
   const [serverResponse, setServerResponse] = useState('');
   const [formData, setFormData] = useState({

@@ -1,17 +1,12 @@
 import { Box, useColorMode, Container, Stack, Heading, FormControl, FormLabel, Input, Divider, Text, Button, Link } from '@chakra-ui/react'
 import { Logo } from '../../Assets/Logo/Logo'
+import { bgColor, bgColorInput, textColorInput } from '../../helper/theme';
 import { loginApi } from '../../Services/api/auth';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 export const SignIn = () => {
   const { colorMode } = useColorMode();
-  const bgColor = { light: '#F7FAFC', dark: '#2C7A7B' };
-  const bgColorInput = { light: '#F7FAFC', dark: '#ffffff' };
-  const textColorInput = { light: '#2C7A7B', dark: 'black' };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
